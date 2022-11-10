@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 from src.configurations import Configurations
 
@@ -9,7 +9,5 @@ class PixelBattle:
         print(configs.html_file_path)
 
         @app.route("/")
-        def index():
-            with open(configs.html_file_path, 'r') as html_file:
-                page = html_file.read()
-                return page
+        def output():
+            return render_template('index.html')
