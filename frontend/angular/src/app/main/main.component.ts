@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { generate } from 'rxjs';
 
 @Component({
-  selector: 'app-footter',
-  templateUrl: './footter.component.html',
-  styleUrls: ['./footter.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class FootterComponent implements OnInit{
+export class MainComponent implements OnInit{
 
   public fakeArr = new Array(8450)
   public colors = new Array(10)
@@ -19,7 +19,7 @@ export class FootterComponent implements OnInit{
     console.log(someArr)
     // for (let i = 0; i < someArr.length; i++) {
     //   console.log('elem i')
-    //   console.log(someArr[i])  
+    //   console.log(someArr[i])
     // }
   }
   public setColor(event:Event):void{
