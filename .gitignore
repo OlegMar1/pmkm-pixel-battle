@@ -7,3 +7,4 @@ frontend/angular/.vscode
 frontend/angular/.gitignore
 frontend/angular/README.md
 frontend/angular/.angular
+frontend/angular/dist
