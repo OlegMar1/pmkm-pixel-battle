@@ -1,1 +1,12 @@
-<p>main works!</p>
+<div class="block" id="test">
+    <div class="pixel" *ngFor ="let items of fakeArr" (click)="SaveColor($event)"></div>
+</div>
+<div class="footter">
+    <div class="colors">
+        <div class="color" *ngFor = 'let color of colors' (click)="SaveColor($event)"></div>
+    </div>
+    <div class="btns">
+        <button>exept</button>
+        <button>cancel</button>
+    </div>
+</div>
