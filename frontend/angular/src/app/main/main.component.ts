@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class FootterComponent implements OnInit{
+export class MainComponent implements OnInit{
 
   public indexArr = this.generateIndex()
   public colors = ['pink','red','orange','yellow','yellowgreen','green','lightblue','blue','purple','black']
@@ -17,7 +17,7 @@ export class FootterComponent implements OnInit{
 
   constructor() { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
   }
 
   public generateIndex(){
