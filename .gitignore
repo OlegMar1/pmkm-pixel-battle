@@ -2,3 +2,9 @@
 venv
 __pychache__
 src/__pycache__
+frontend/angular/node_modules
+frontend/angular/.vscode
+frontend/angular/.gitignore
+frontend/angular/README.md
+frontend/angular/.angular
+frontend/angular/dist
