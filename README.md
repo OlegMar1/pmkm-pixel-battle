@@ -6,4 +6,5 @@ venv\Scripts\activate
 
 pip install --upgrade -r requirements.txt
 
-ng build --base-href /static/   (in frontend/angular dir)
+py app.py       run including build steps
+py app.py -s    skip build
