@@ -16,24 +16,13 @@ export class MainComponent implements OnInit{
   private colorBlock!:HTMLDivElement
   private isCell = false;
   private isColor = false;
-  
+
 
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
-//     Pusher.LogToConsole = true;
-
-//     const pusher = new Pusher('25291c0752d6089a660d', {
-//       cluster: 'eu'
-//     });
-
-//     const channel = pusher.subscribe('pixel-battle-channel');
-//      chanel.bind('pixel-data', data => {
-// //         parse data
-// //         color = data['color'];
-//     });
     Pusher.logToConsole = true;
 
     var pusher = new Pusher('eaf74954e926bfb7e254', {
@@ -42,13 +31,17 @@ export class MainComponent implements OnInit{
 
     var channel = pusher.subscribe('pixel-battle-channel');
     channel.bind('paint-pixel', function(data) {
-      alert(JSON.stringify(data));
-      for (let i = 0; i < data.length; i++) {
-        let x =parseInt(data[i].coord_x);
-        let y =parseInt(data[i].coord_y);
-        let color = data[i].color
-        this.Paint2(x,y,color)
-      }
+//       alert(JSON.stringify(data));
+//       for (let i = 0; i < data.length; i++) {
+      let x =parseInt(data["coord_x"]);
+      let y =parseInt(data["coord_y"]);
+      let color = data["color"];
+//       alert(x);
+//       this.Paint2(x,y,color)
+    this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
+    this.cell.style.backgroundColor=color
+    this.cell.style.border = 'none';
+//       }
     });
   }
 
@@ -89,11 +82,11 @@ export class MainComponent implements OnInit{
    */
   public Paint():void{
     if(this.isCell&&this.isColor){
-      this.cell.style.backgroundColor=this.color;
-      this.cell.style.border = 'none';
+//       this.cell.style.backgroundColor=this.color;
+//       this.cell.style.border = 'none';
       let coords = this.cell.id.split(':')
-      this.cell = <HTMLDivElement> document.querySelector('.anreal');
-      this.isCell=false;
+//       this.cell = <HTMLDivElement> document.querySelector('.anreal');
+//       this.isCell=false;
       this.http.post('http://127.0.0.1:5000/paint-pixel', {
         test: 'test-message2',
         coord_x: parseInt(coords[0]),
@@ -103,7 +96,8 @@ export class MainComponent implements OnInit{
     }
   }
 
-  public Paint2(x:number,y:number,color:string):void{
+  public Paint2(x,y,color):void{
+    alert(x)
     this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
     this.cell.style.backgroundColor=color
     this.cell.style.border = 'none';
