@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'angular';
 
   ngOnInit(): void {
+
     // Pusher.logToConsole = true;
 
     // var pusher = new Pusher('eaf74954e926bfb7e254', {
@@ -20,5 +21,6 @@ export class AppComponent {
     // channel.bind('paint-pixel', function(data) {
     //   alert(JSON.stringify(data));
     // });
+    
   }
 }
