@@ -21,7 +21,9 @@ class PixelBattle:
             try:
                 data = request.get_json()
                 color = data['color']
-                pusher_client.trigger('pixel-battle-channel', 'paint-pixel', {'color': color})
+                coord_x = data['coord_x']
+                coord_y = data['coord_y']
+                pusher_client.trigger('pixel-battle-channel', 'paint-pixel', {'color': color, 'coord_x': coord_x, 'coord_y': coord_y})
                 return jsonify({'result': 'success'})
             except:
                 return jsonify({'result': 'failure'})

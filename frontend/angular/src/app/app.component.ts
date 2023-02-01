@@ -10,15 +10,17 @@ export class AppComponent {
   title = 'angular';
 
   ngOnInit(): void {
-    Pusher.logToConsole = true;
 
-    var pusher = new Pusher('eaf74954e926bfb7e254', {
-      cluster: 'eu'
-    });
+    // Pusher.logToConsole = true;
 
-    var channel = pusher.subscribe('pixel-battle-channel');
-    channel.bind('paint-pixel', function(data) {
-      alert(JSON.stringify(data));
-    });
+    // var pusher = new Pusher('eaf74954e926bfb7e254', {
+    //   cluster: 'eu'
+    // });
+
+    // var channel = pusher.subscribe('pixel-battle-channel');
+    // channel.bind('paint-pixel', function(data) {
+    //   alert(JSON.stringify(data));
+    // });
+    
   }
 }
