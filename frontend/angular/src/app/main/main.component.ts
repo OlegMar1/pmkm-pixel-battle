@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import Pusher from 'pusher-js'
 
 @Component({
   selector: 'app-main',
@@ -15,9 +17,26 @@ export class MainComponent implements OnInit{
   private isCell = false;
   private isColor = false;
 
-  constructor() { }
 
-  ngOnInit(): void { 
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('eaf74954e926bfb7e254', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('pixel-battle-channel');
+    channel.bind('paint-pixel', function(data) {
+      let x =parseInt(data["coord_x"]);
+      let y =parseInt(data["coord_y"]);
+      let color = data["color"];
+      this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
+      this.cell.style.backgroundColor=color
+      this.cell.style.border = 'none'
+    });
   }
 
   public generateIndex(){
@@ -29,7 +48,7 @@ export class MainComponent implements OnInit{
           arr.push(str)
         }
       }
-      
+
       return arr
   }
 
@@ -44,8 +63,8 @@ export class MainComponent implements OnInit{
 
   public SaveColor(event:Event):void{
     if(!(this.colorBlock==undefined)){
-      this.colorBlock.style.border = '1px solid gray';
-    }  
+      this.colorBlock.style.border = '1px solid black';
+    }
     this.colorBlock=<HTMLDivElement>event.target
     this.colorBlock.style.border = '2px solid rgb(80, 80, 197)'
     this.color = this.colorBlock.style.backgroundColor
@@ -57,13 +76,29 @@ export class MainComponent implements OnInit{
    */
   public Paint():void{
     if(this.isCell&&this.isColor){
-    this.cell.style.backgroundColor=this.color
-    this.cell.style.border = 'none';
-    this.colorBlock.style.border = '1px solid gray';
-    this.cell = <HTMLDivElement> document.querySelector('.anreal')
-    this.isCell=false;
-    this.isColor=false
+      let coords = this.cell.id.split(':')
+      this.http.post('http://127.0.0.1:5000/paint-pixel', {
+        test: 'test-message2',
+        coord_x: parseInt(coords[0]),
+        coord_y: parseInt(coords[1]),
+        color: this.color
+      }).subscribe();
     }
   }
 
+  public Paint2(x,y,color):void{
+    alert(x)
+    this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
+    this.cell.style.backgroundColor=color
+    this.cell.style.border = 'none';
+  }
+
+
+  test():void{
+    let str='1'
+    console.log(str)
+  }
+
 }
+
+//npm/yarn run ngcc

@@ -1,5 +1,6 @@
 <div class="block" id="test">
-    <div class="pixel" *ngFor ="let item of indexArr" [id] = "item" (click)="chouseCell($event)"></div>
+    <div class="pixel" *ngFor ="let item of indexArr" [id] = "item"  (click)="chouseCell($event)"
+    (dblclick)="Paint()"></div>
 </div>
 <div class="footter">
     <div class="colors">
