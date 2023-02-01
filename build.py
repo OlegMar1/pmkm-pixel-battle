@@ -9,15 +9,28 @@ class Build:
         configs = Configurations()
         os.system(f'cmd /c "cd frontend\\angular & npm install & ng b"')
 
-        if not os.path.exists(configs.static_folder_path):
-            os.mkdir(configs.static_folder_path)
-        else:
+        # if not os.path.exists(configs.static_folder_path):
+        #     os.mkdir(configs.static_folder_path)
+        # else:
+        #     shutil.rmtree(configs.static_folder_path)
+        #     os.rmdir(configs.static_folder_path)
+        #     os.mkdir(configs.static_folder_path)
+        #
+        # if not os.path.exists(configs.templates_folder_path):
+        #     os.mkdir(configs.templates_folder_path)
+        # else:
+        #     shutil.rmtree(configs.templates_folder_path)
+        #     os.rmdir(configs.templates_folder_path)
+        #     os.mkdir(configs.static_folder_path)
+
+        if os.path.exists(configs.static_folder_path):
             shutil.rmtree(configs.static_folder_path)
 
-        if not os.path.exists(configs.templates_folder_path):
-            os.mkdir(configs.templates_folder_path)
-        else:
+        if os.path.exists(configs.templates_folder_path):
             shutil.rmtree(configs.templates_folder_path)
+
+        os.mkdir(configs.static_folder_path)
+        os.mkdir(configs.templates_folder_path)
 
         static_files_list = []
         template_files_list = []

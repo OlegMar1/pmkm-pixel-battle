@@ -24,24 +24,18 @@ export class MainComponent implements OnInit{
 
   ngOnInit(): void {
     Pusher.logToConsole = true;
-
     var pusher = new Pusher('eaf74954e926bfb7e254', {
       cluster: 'eu'
     });
 
     var channel = pusher.subscribe('pixel-battle-channel');
     channel.bind('paint-pixel', function(data) {
-//       alert(JSON.stringify(data));
-//       for (let i = 0; i < data.length; i++) {
       let x =parseInt(data["coord_x"]);
       let y =parseInt(data["coord_y"]);
       let color = data["color"];
-//       alert(x);
-//       this.Paint2(x,y,color)
-    this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
-    this.cell.style.backgroundColor=color
-    this.cell.style.border = 'none';
-//       }
+      this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
+      this.cell.style.backgroundColor=color
+      this.cell.style.border = 'none'
     });
   }
 
@@ -82,11 +76,7 @@ export class MainComponent implements OnInit{
    */
   public Paint():void{
     if(this.isCell&&this.isColor){
-//       this.cell.style.backgroundColor=this.color;
-//       this.cell.style.border = 'none';
       let coords = this.cell.id.split(':')
-//       this.cell = <HTMLDivElement> document.querySelector('.anreal');
-//       this.isCell=false;
       this.http.post('http://127.0.0.1:5000/paint-pixel', {
         test: 'test-message2',
         coord_x: parseInt(coords[0]),
