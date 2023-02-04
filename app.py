@@ -15,7 +15,7 @@ if __name__ == "__main__":
         __name__,
         template_folder='frontend/templates',
         static_folder='frontend/static',
-        static_url_path='/'
+        static_url_path='/',
     )
     PixelBattle(app)
     app.run()

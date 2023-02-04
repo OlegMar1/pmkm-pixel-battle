@@ -10,7 +10,7 @@ import Pusher from 'pusher-js'
 export class MainComponent implements OnInit{
 
   public indexArr = this.generateIndex()
-  public colors = ['pink','red','orange','yellow','yellowgreen','green','lightblue','blue','purple','black']
+  public colors = ['pink','red','orange','yellow','yellowgreen','green','lightblue','blue','purple','black','white']
   public color!: string;
   private cell!:HTMLDivElement;
   private colorBlock!:HTMLDivElement
@@ -23,6 +23,15 @@ export class MainComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.http.post('http://127.0.0.1:5000/initial-load', {test:'test'})
+      .subscribe((res) => {
+        for(var coords in res){
+        let color = res[coords]
+        this.cell = (<HTMLDivElement>document.getElementById(coords))
+        this.cell.style.backgroundColor=color
+//         this.cell.style.border = 'none'
+      }
+      });
     Pusher.logToConsole = true;
     var pusher = new Pusher('eaf74954e926bfb7e254', {
       cluster: 'eu'
@@ -35,7 +44,7 @@ export class MainComponent implements OnInit{
       let color = data["color"];
       this.cell = (<HTMLDivElement>document.getElementById(x+':'+y))
       this.cell.style.backgroundColor=color
-      this.cell.style.border = 'none'
+//       this.cell.style.border = 'none'
     });
   }
 
